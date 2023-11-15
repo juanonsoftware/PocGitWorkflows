@@ -7,3 +7,5 @@ This is the new repo. Steps in https://gist.github.com/juanonsoftware/acdaccf00f
 -> Feature Z will be implemeted
 
 Release 1.1.0 Start (Completed)
+
+A new HOTFIX started
