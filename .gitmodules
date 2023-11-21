@@ -1,0 +1,3 @@
+[submodule "PublicSubmodule"]
+	path = PublicSubmodule
+	url = https://github.com/juanonsoftware/PocGitAsPublicSubmodule.git
