@@ -1,3 +1,6 @@
 [submodule "PublicSubmodule"]
 	path = PublicSubmodule
 	url = https://github.com/juanonsoftware/PocGitAsPublicSubmodule.git
+[submodule "PrivateSubmodule"]
+	path = PrivateSubmodule
+	url = https://github.com/juanonsoftware/PocGitAsPrivateSubmodule.git
