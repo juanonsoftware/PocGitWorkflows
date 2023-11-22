@@ -1,32 +1,22 @@
 name: workflow_01
 on:
-  workflow_dispatch:
-     inputs:
-      workflow_02:
-        description: 'ًWorkflow 2 which will be triggered'
-        required: true
-        default: 'workflow_02'
-
-      workflow2_github_account:
-        description: 'GitHub Account Owner'
-        required: true
-        default: ':userName'
-
-      workflow2_repo_github:
-        description: 'repo-name'
-        required: true
-        default: ':repoName' 
+  push:
+    branches: [main]
 
 jobs:
-  build:
+  dispatch:
+    name: Dispatch
+    env:
+      PACKAGES_TO_UPGRADE: ${{ needs.run_publish.outputs.packages }}
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        repo: ['our-company/repository-B', 'our-company/repository-C']
+    timeout-minutes: 5
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Test
+      - name: Dispatch to workflows
         run: |
-          curl -X POST https://api.github.com/repos/juanonsoftware/PocGitAsPublicSubmodule/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u ${{ secrets.ACTIONS_KEY }} \
-          --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
-      - uses: actions/checkout@v3
+            curl -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.ACTIONS_KEY }}" \
+            --request POST \
+            --data '{"event_type": "some_event", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
