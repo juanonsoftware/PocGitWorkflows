@@ -2,7 +2,7 @@ name: workflow_01
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   dispatch:
