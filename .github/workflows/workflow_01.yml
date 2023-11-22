@@ -6,17 +6,16 @@ on:
 jobs:
   dispatch:
     name: Dispatch
-    env:
-      PACKAGES_TO_UPGRADE: ${{ needs.run_publish.outputs.packages }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         repo: ['our-company/repository-B', 'our-company/repository-C']
     timeout-minutes: 5
     steps:
-      - name: Dispatch to workflows
-        run: |
-            curl -H "Accept: application/vnd.github.everest-preview+json" \
-            -H "Authorization: token ${{ secrets.ACTIONS_KEY }}" \
-            --request POST \
-            --data '{"event_type": "some_event", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
+      - name: Invoke workflow in another repo with inputs
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: workflow_02.yaml
+          repo: ${{ matrix.repo }}
+          inputs: '{ "message": "blah blah", "something": false }'
+          
