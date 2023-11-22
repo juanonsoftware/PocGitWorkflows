@@ -18,7 +18,7 @@ jobs:
       - name: Invoke workflow in another repo with inputs
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: workflow_02.yaml
+          workflow: workflow_02
           repo: ${{ matrix.repo }}
           inputs: '{ "message": "blah blah", "something": false }'
           
