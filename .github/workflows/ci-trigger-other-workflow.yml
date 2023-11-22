@@ -1,4 +1,4 @@
-name: workflow_01
+name: ci-trigger-other-workflow
 on:
   workflow_dispatch:
   push:
@@ -11,12 +11,12 @@ jobs:
     
     strategy:
       matrix:
-        repo: ['juanonsoftware/PocGitAsPublicSubmodule']
+        repos: ['juanonsoftware/PocGitAsPublicSubmodule']
     timeout-minutes: 5
     
     steps:
       - name: Invoke workflow in another repo with inputs
-        uses: benc-uk/workflow-dispatch@v1
+        uses: benc-uk/workflow-dispatch@v1.2.2
         with:
           workflow: workflow_02
           repo: ${{ matrix.repo }}
