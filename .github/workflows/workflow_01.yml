@@ -21,5 +21,4 @@ jobs:
           workflow: workflow_02
           repo: ${{ matrix.repo }}
           token: ${{ secrets.GH_DISPATCH_TOKEN }}
-          inputs: '{ "message": "blah blah", "something": false }'
           
